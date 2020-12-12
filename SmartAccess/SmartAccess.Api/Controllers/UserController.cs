@@ -32,5 +32,17 @@ namespace SmartAccess.Api.Controllers
 
             return usuario;
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+
+            var usuario = _context.Users.Where(u => u.Id== id).ToList();
+            if (usuario == null)
+            {
+                return BadRequest("No se encontraron datos para este usuario");
+            }
+            return Ok(usuario);
+        }
     }
 }
