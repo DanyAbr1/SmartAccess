@@ -1,11 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             x:Class="SmartAccess.Droid.App">
-  <Application.Resources>
+<prism:PrismApplication
+    x:Class="SmartAccess.Droid.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com">
+    <Application.Resources>
 
-    <!-- Application resource dictionary -->
+        <!--  Application resource dictionary  -->
 
-  </Application.Resources>
+        <Color x:Key="ColorTextPrimary">#00944F</Color>
+        <Color x:Key="ColorHeaderSection">#efefef</Color>
+        <Color x:Key="ColorTextPrimaryDark">#00644F</Color>
+        <Color x:Key="Accent">#CB0000</Color>
+        <Color x:Key="NavigationPrimary">#00944F</Color>
+        <Color x:Key="TitleResumenColor">#FFCF06</Color>
+        <Color x:Key="MontoColor">#008a41</Color>
+        <Color x:Key="BackgroundPagesColor">#f2f7f5</Color>
+        <Color x:Key="LabelInformacion">#009251</Color>
+
+
+        <ResourceDictionary>
+            <OnPlatform x:Key="MaterialFontFamily" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Font Awesome 5 Free" />
+                <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome 5 Free" />
+            </OnPlatform>
+        </ResourceDictionary>
+
+
+        <!--  Styles  -->
+
+
+        <Style x:Key="ProductoFrame" TargetType="Frame">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style TargetType="{x:Type Frame}">
+            <Setter Property="Margin" Value="8" />
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="BorderColor" Value="{StaticResource Accent}" />
+            <Setter Property="CornerRadius" Value="10" />
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="15,0,15,15" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+        </Style>
+        <Style x:Key="ButtonNormal" TargetType="Button" />
+
+        <Style TargetType="{x:Type ActivityIndicator}">
+            <Setter Property="Color" Value="{StaticResource Accent}" />
+        </Style>
+        <ResourceDictionary>
+            <!--<x:String x:Key="UrlAPI">https://apipointcardemo.azurewebsites.net</x:String>-->
+            <x:String x:Key="UrlAPI">https://192.168.1.108:5001</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
 </prism:PrismApplication>
