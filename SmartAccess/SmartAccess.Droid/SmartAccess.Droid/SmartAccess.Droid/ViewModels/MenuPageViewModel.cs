@@ -67,7 +67,7 @@ namespace SmartAccess.Droid.ViewModels
                  new Menu
                 {
                     Icono = IconFont.Store,
-                    Pagina = "ChatsPage",
+                    Pagina = "ChatPage",
                     Titulo = "Mensajes"
                 },
                 //  new Menu

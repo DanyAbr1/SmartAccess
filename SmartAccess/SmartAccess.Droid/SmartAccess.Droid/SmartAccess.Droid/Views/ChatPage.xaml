@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAccess.Droid.Views.ChatPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:SmartAccess.Droid.Controls"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Mensajes"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <StackLayout Margin="10">
+
+        <controls:AutoScrollListView
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="False"
+            ItemsSource="{Binding Conversation}"
+            SelectionMode="None"
+            VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="5">
+                            <Label
+                                FontSize="Small"
+                                LineBreakMode="NoWrap"
+                                Text="{Binding Name}">
+                                <Label.Triggers>
+                                    <DataTrigger
+                                        Binding="{Binding UserColor}"
+                                        TargetType="Label"
+                                        Value="1">
+                                        <Setter Property="TextColor" Value="Green" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                            <Label
+                                FontSize="13"
+                                LineBreakMode="NoWrap"
+                                Text="{Binding Message}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </controls:AutoScrollListView>
+
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <controls:StandardEntry
+                Grid.Column="0"
+                BorderColor="Gray"
+                BorderThickness="1"
+                CornerRadius="10"
+                Keyboard="Chat"
+                Opacity="50"
+                Placeholder="Escribe un mensaje"
+                PlaceholderColor="Gray"
+                Text="{Binding WritteMessage}" />
+
+            <ImageButton
+                Grid.Column="1"
+                Padding="5"
+                BackgroundColor="#CB0000"
+                Command="{Binding SendMessageCommand}"
+                CornerRadius="30"
+                HorizontalOptions="End"
+                Source="{OnPlatform Android='ic_send.png',
+                                    iOS='ic_send.png',
+                                    UWP='Assets/ic_send.png'}"
+                VerticalOptions="Center" />
+
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>

@@ -21,6 +21,7 @@ namespace SmartAccess.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseUrls("https://192.168.43.206:5001", "http://192.168.43.206:5000");
                 });
     }
 }

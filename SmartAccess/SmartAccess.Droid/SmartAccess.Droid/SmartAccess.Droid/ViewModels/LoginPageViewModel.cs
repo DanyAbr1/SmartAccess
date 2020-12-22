@@ -121,9 +121,7 @@ namespace SmartAccess.Droid.ViewModels
             IsRunning = false;
 
             Preferences.Set("idUsuario", response.Result.Id);
-            Preferences.Set("nombreCompleto", $"{ response.Result.Name} { response.Result.LastName}");
-            Preferences.Set("TotalPagado", "0");
-            Preferences.Set("idPagado", "0");
+            Preferences.Set("nombreCompleto", $"{ response.Result.Name} { response.Result.LastName}");            
 
 
             var parameter = new NavigationParameters();

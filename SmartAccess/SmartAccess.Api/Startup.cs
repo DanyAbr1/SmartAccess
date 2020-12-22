@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SmartAccess.Api.Hubs;
 using SmartAccess.Api.Models;
 using System;
 
@@ -31,10 +32,13 @@ namespace SmartAccess.Api
             }));
             services.AddControllers();
             services.AddControllers();
+            services.AddSignalR();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SmartAccess.Api", Version = "v1" });
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +49,7 @@ namespace SmartAccess.Api
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SmartAccess.Api v1"));
-            }
+            }            
 
             app.UseHttpsRedirection();
 
@@ -56,6 +60,7 @@ namespace SmartAccess.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<MessagesHub>("/hubs/messages");
             });
         }
     }

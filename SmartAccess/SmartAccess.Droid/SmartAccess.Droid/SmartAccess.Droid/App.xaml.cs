@@ -2,6 +2,7 @@ using Prism;
 using Prism.Ioc;
 using SmartAccess.Droid.ViewModels;
 using SmartAccess.Droid.Views;
+using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -10,6 +11,12 @@ namespace SmartAccess.Droid
 {
     public partial class App
     {
+
+        public static string AzureBackendUrl =
+           DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.1.108:5001" : "http://localhost:5000";
+        public static bool UseMockDataStore = false;
+        
+
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -31,6 +38,7 @@ namespace SmartAccess.Droid
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<MenuPage, MenuPageViewModel>();
             containerRegistry.RegisterForNavigation<GatewayPage, GatewayPageViewModel>();
+            containerRegistry.RegisterForNavigation<ChatPage, ChatPageViewModel>();
         }
     }
 }

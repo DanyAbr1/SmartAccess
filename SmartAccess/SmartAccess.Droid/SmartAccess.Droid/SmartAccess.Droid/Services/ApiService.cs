@@ -177,174 +177,231 @@ namespace SmartAccess.Droid.Services
                 };
             }
         }
+
+
+        public async Task<Response<List<Chat>>> GetChats(
+         string urlBase,
+         string servicePrefix,
+         string controller)
+        {
+            try
+            {
+
+                //var request = new IdRequest { IdUsuario = id };
+                //var requestString = JsonConvert.SerializeObject(request);
+                //var content = new StringContent("", Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+           
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<List<Chat>>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var chats = JsonConvert.DeserializeObject<List<Chat>>(result);
+                return new Response<List<Chat>>
+                {
+                    IsSuccess = true,
+                    Result = chats
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<Chat>>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+
+        public async Task<Response<Chat>> NewMessage(
+        string urlBase,
+        string servicePrefix,
+        string controller,
+        object request)
+        {
+            try
+            {
+
+                //var request = new IdRequest { IdUsuario = id };
+                var requestString = JsonConvert.SerializeObject(request);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                //var client = new HttpClient
+                //{
+                //    BaseAddress = new Uri(urlBase)
+                //};
+
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<Chat>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var chat = JsonConvert.DeserializeObject<Chat>(result);
+                return new Response<Chat>
+                {
+                    IsSuccess = true,
+                    Result = chat
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<Chat>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
         #endregion
 
-       // #region Vehiculos
-       // public async Task<Response<List<Vehiculo>>> GetVehiculosUser(
-       //  string urlBase,
-       //  string servicePrefix,
-       //  string controller,
-       //  int id)
-       // {
-       //     try
-       //     {
+        // #region Vehiculos
+        // public async Task<Response<List<Vehiculo>>> GetVehiculosUser(
+        //  string urlBase,
+        //  string servicePrefix,
+        //  string controller,
+        //  int id)
+        // {
+        //     try
+        //     {
 
-       //         //var request = new IdRequest { IdUsuario = id };
-       //         //var requestString = JsonConvert.SerializeObject(request);
-       //         //var content = new StringContent("", Encoding.UTF8, "application/json");
+        //         //var request = new IdRequest { IdUsuario = id };
+        //         //var requestString = JsonConvert.SerializeObject(request);
+        //         //var content = new StringContent("", Encoding.UTF8, "application/json");
 
-       //         HttpClientHandler clientHandler = new HttpClientHandler();
-       //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+        //         HttpClientHandler clientHandler = new HttpClientHandler();
+        //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-       //         // Pass the handler to httpclient(from you are calling api)
-       //         var client = new HttpClient(clientHandler)
-       //         {
-       //             BaseAddress = new Uri(urlBase)
-       //         };
+        //         // Pass the handler to httpclient(from you are calling api)
+        //         var client = new HttpClient(clientHandler)
+        //         {
+        //             BaseAddress = new Uri(urlBase)
+        //         };
 
-       //         //var client = new HttpClient
-       //         //{
-       //         //    BaseAddress = new Uri(urlBase)
-       //         //};
-
-
-
-       //         var url = $"{urlBase}{servicePrefix}{controller}/{id}";
-       //         var response = await client.GetAsync(url);
-       //         var result = await response.Content.ReadAsStringAsync();
-
-       //         if (!response.IsSuccessStatusCode)
-       //         {
-       //             return new Response<List<Vehiculo>>
-       //             {
-       //                 IsSuccess = false,
-       //                 Message = result,
-       //             };
-       //         }
-
-       //         var vehiculo = JsonConvert.DeserializeObject<List<Vehiculo>>(result);
-       //         return new Response<List<Vehiculo>>
-       //         {
-       //             IsSuccess = true,
-       //             Result = vehiculo
-       //         };
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         return new Response<List<Vehiculo>>
-       //         {
-       //             IsSuccess = false,
-       //             Message = ex.Message
-       //         };
-       //     }
-       // }
-
-
-       // public async Task<Response<List<Eventos>>> GetEventosDeHoy(
-       //string urlBase,
-       //string servicePrefix,
-       //string controller,
-       //object request)
-       // {
-       //     try
-       //     {
-
-       //         //var request = new IdRequest { IdUsuario = id };
-       //         var requestString = JsonConvert.SerializeObject(request);
-       //         var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-
-       //         HttpClientHandler clientHandler = new HttpClientHandler();
-       //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-       //         // Pass the handler to httpclient(from you are calling api)
-       //         var client = new HttpClient(clientHandler)
-       //         {
-       //             BaseAddress = new Uri(urlBase)
-       //         };
-
-       //         //var client = new HttpClient
-       //         //{
-       //         //    BaseAddress = new Uri(urlBase)
-       //         //};
+        //         //var client = new HttpClient
+        //         //{
+        //         //    BaseAddress = new Uri(urlBase)
+        //         //};
 
 
 
-       //         var url = $"{urlBase}{servicePrefix}{controller}";
-       //         var response = await client.PostAsync(url, content);
-       //         var result = await response.Content.ReadAsStringAsync();
+        //         var url = $"{urlBase}{servicePrefix}{controller}/{id}";
+        //         var response = await client.GetAsync(url);
+        //         var result = await response.Content.ReadAsStringAsync();
 
-       //         if (!response.IsSuccessStatusCode)
-       //         {
-       //             return new Response<List<Eventos>>
-       //             {
-       //                 IsSuccess = false,
-       //                 Message = result,
-       //             };
-       //         }
+        //         if (!response.IsSuccessStatusCode)
+        //         {
+        //             return new Response<List<Vehiculo>>
+        //             {
+        //                 IsSuccess = false,
+        //                 Message = result,
+        //             };
+        //         }
 
-       //         var eventos = JsonConvert.DeserializeObject<List<Eventos>>(result);
-       //         return new Response<List<Eventos>>
-       //         {
-       //             IsSuccess = true,
-       //             Result = eventos
-       //         };
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         return new Response<List<Eventos>>
-       //         {
-       //             IsSuccess = false,
-       //             Message = ex.Message
-       //         };
-       //     }
-       // }
+        //         var vehiculo = JsonConvert.DeserializeObject<List<Vehiculo>>(result);
+        //         return new Response<List<Vehiculo>>
+        //         {
+        //             IsSuccess = true,
+        //             Result = vehiculo
+        //         };
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return new Response<List<Vehiculo>>
+        //         {
+        //             IsSuccess = false,
+        //             Message = ex.Message
+        //         };
+        //     }
+        // }
 
-       // public async Task<Response<object>> RegistroVehiculo(string urlBase, string servicePrefix, string controller, object vehiculo)
-       // {
-       //     try
-       //     {
-       //         var requestString = JsonConvert.SerializeObject(vehiculo);
-       //         var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-       //         HttpClientHandler clientHandler = new HttpClientHandler();
-       //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-       //         // Pass the handler to httpclient(from you are calling api)
-       //         var client = new HttpClient(clientHandler)
-       //         {
-       //             BaseAddress = new Uri(urlBase)
-       //         };
 
-       //         var url = $"{urlBase}{servicePrefix}{controller}";
-       //         var response = await client.PostAsync(url, content);
-       //         var result = await response.Content.ReadAsStringAsync();
 
-       //         if (!response.IsSuccessStatusCode)
-       //         {
-       //             return new Response<object>
-       //             {
-       //                 IsSuccess = false,
-       //                 Message = result,
-       //             };
-       //         }
+        // public async Task<Response<object>> RegistroVehiculo(string urlBase, string servicePrefix, string controller, object vehiculo)
+        // {
+        //     try
+        //     {
+        //         var requestString = JsonConvert.SerializeObject(vehiculo);
+        //         var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+        //         HttpClientHandler clientHandler = new HttpClientHandler();
+        //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
 
-       //         var x = JsonConvert.DeserializeObject<object>(result);
-       //         return new Response<object>
-       //         {
-       //             IsSuccess = true,
-       //             Result = x
-       //         };
-       //     }
-       //     catch (Exception ex)
-       //     {
+        //         // Pass the handler to httpclient(from you are calling api)
+        //         var client = new HttpClient(clientHandler)
+        //         {
+        //             BaseAddress = new Uri(urlBase)
+        //         };
 
-       //         return new Response<object>
-       //         {
-       //             IsSuccess = false,
-       //             Message = ex.Message
-       //         };
-       //     }
-       // }
+        //         var url = $"{urlBase}{servicePrefix}{controller}";
+        //         var response = await client.PostAsync(url, content);
+        //         var result = await response.Content.ReadAsStringAsync();
 
-       // #endregion
+        //         if (!response.IsSuccessStatusCode)
+        //         {
+        //             return new Response<object>
+        //             {
+        //                 IsSuccess = false,
+        //                 Message = result,
+        //             };
+        //         }
+
+        //         var x = JsonConvert.DeserializeObject<object>(result);
+        //         return new Response<object>
+        //         {
+        //             IsSuccess = true,
+        //             Result = x
+        //         };
+        //     }
+        //     catch (Exception ex)
+        //     {
+
+        //         return new Response<object>
+        //         {
+        //             IsSuccess = false,
+        //             Message = ex.Message
+        //         };
+        //     }
+        // }
+
+        // #endregion
     }
 }
