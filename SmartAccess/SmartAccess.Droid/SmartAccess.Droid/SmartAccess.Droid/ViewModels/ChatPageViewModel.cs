@@ -94,24 +94,17 @@ namespace SmartAccess.Droid.ViewModels
             }
 
 
-            //response.Result.ForEach(x => Conversation.Add(x));            
-            if (response.Result.Count > 0)
-            {
-                for (int i = 0; i < response.Result.Count; i++)
-                {
-                    _
-                    if(response.Result[i].Id == _usuario.Id)
-                    {
-
-                    }
-                }
-            }
+            response.Result.ForEach(x => Conversation.Add(x));
+     
 
             IsRunning = false;
 
         }
         private async void SendedMessage()
         {
+            if (string.IsNullOrEmpty(WritteMessage))
+                return;
+
             var msj = new Chat
             {
                 Name = _usuario.Name,

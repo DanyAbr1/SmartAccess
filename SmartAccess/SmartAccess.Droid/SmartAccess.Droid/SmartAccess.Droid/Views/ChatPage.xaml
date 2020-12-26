@@ -24,16 +24,9 @@
                             <Label
                                 FontSize="Small"
                                 LineBreakMode="NoWrap"
-                                Text="{Binding Name}">
-                                <Label.Triggers>
-                                    <DataTrigger
-                                        Binding="{Binding UserColor}"
-                                        TargetType="Label"
-                                        Value="1">
-                                        <Setter Property="TextColor" Value="Green" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                            </Label>
+                                Text="{Binding Name}"
+                                TextColor="Green" />
+
                             <Label
                                 FontSize="13"
                                 LineBreakMode="NoWrap"

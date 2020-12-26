@@ -37,7 +37,6 @@ namespace SmartAccess.Droid.ViewModels
 
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
         public DelegateCommand RegistrarCommand => _registrarCommand ?? (_registrarCommand = new DelegateCommand(RegisterUser));
-
         public DelegateCommand RestaurarPassCommand => _restaurarPassCommand ?? (_restaurarPassCommand = new DelegateCommand(OlvidePasswordPage));
 
 
@@ -116,9 +115,7 @@ namespace SmartAccess.Droid.ViewModels
                 return;
             }
 
-            Password = string.Empty;
-
-            IsRunning = false;
+            
 
             Preferences.Set("idUsuario", response.Result.Id);
             Preferences.Set("nombreCompleto", $"{ response.Result.Name} { response.Result.LastName}");            
@@ -126,18 +123,34 @@ namespace SmartAccess.Droid.ViewModels
 
             var parameter = new NavigationParameters();
             parameter.Add("Usuario", response.Result);
+
+
+            var url2 = App.Current.Resources["UrlAPILock"].ToString();
+            var response2 = await _apiService.GetSesionByEmailAsync(url2, "/session");
+            if (!response2.IsSuccess)
+            {
+                var respuesta = JsonConvert.DeserializeObject<ResponseMessage>(response.Message);
+                await App.Current.MainPage.DisplayAlert("Información", respuesta.Message, "Aceptar");
+                Password = string.Empty;
+                return;
+            }
+
+            Password = string.Empty;
+
+            IsRunning = false;
+
             await _navigationService.NavigateAsync("/MenuPage/NavigationPage/GatewayPage", parameter);
         }
 
 
         private async void RegisterUser()
         {
-            await _navigationService.NavigateAsync("NuevoUsuarioPage");
+            await _navigationService.NavigateAsync("NewUserPage");
         }
 
         private async void OlvidePasswordPage()
         {
-            await _navigationService.NavigateAsync("OlvidePasswordPage");
+            await _navigationService.NavigateAsync("ResetPasswordPage");
 
         }
 

@@ -60,13 +60,13 @@ namespace SmartAccess.Droid.ViewModels
             {
                 new Menu
                 {
-                    Icono = IconFont.Home,
+                    Icono = IconFont.DoorOpen,
                     Pagina = "GatewayPage",
                     Titulo = "Puerta"
                 },
                  new Menu
                 {
-                    Icono = IconFont.Store,
+                    Icono = IconFont.EnvelopeOpenText,
                     Pagina = "ChatPage",
                     Titulo = "Mensajes"
                 },

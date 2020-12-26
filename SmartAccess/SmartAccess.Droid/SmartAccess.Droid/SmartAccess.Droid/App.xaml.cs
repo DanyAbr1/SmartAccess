@@ -13,7 +13,7 @@ namespace SmartAccess.Droid
     {
 
         public static string AzureBackendUrl =
-           DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.1.108:5001" : "http://localhost:5000";
+           DeviceInfo.Platform == DevicePlatform.Android ? "https://smartaccessapi.azurewebsites.net" : "http://localhost:5000";
         public static bool UseMockDataStore = false;
         
 
@@ -39,6 +39,8 @@ namespace SmartAccess.Droid
             containerRegistry.RegisterForNavigation<MenuPage, MenuPageViewModel>();
             containerRegistry.RegisterForNavigation<GatewayPage, GatewayPageViewModel>();
             containerRegistry.RegisterForNavigation<ChatPage, ChatPageViewModel>();
+            containerRegistry.RegisterForNavigation<NewUserPage, NewUserPageViewModel>();
+            containerRegistry.RegisterForNavigation<ResetPasswordPage, ResetPasswordPageViewModel>();
         }
     }
 }

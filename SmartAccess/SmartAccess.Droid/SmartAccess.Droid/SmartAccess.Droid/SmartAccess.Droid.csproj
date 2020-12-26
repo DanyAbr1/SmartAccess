@@ -2,9 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>SmartAccess</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\3176-padlock.json" />
+    <None Remove="Resources\41812-christmas-tree.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\3176-padlock.json" />
+    <EmbeddedResource Include="Resources\41812-christmas-tree.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1687" />
@@ -23,6 +35,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MenuPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\NewUserPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ResetPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

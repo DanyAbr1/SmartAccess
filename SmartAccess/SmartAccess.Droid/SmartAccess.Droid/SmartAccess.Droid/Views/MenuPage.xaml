@@ -42,7 +42,8 @@
                     locator:ItemTappedAttached.Command="{Binding SelectMenuCommand}"
                     HasUnevenRows="True"
                     ItemsSource="{Binding Menus, Mode=TwoWay}"
-                    SelectedItem="{Binding Menu}">
+                    SelectedItem="{Binding Menu}"
+                    SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

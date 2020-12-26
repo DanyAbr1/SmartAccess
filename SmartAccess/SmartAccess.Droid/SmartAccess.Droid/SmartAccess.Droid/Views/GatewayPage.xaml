@@ -1,8 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="SmartAccess.Droid.Views.GatewayPage">
-  
+<ContentPage
+    x:Class="SmartAccess.Droid.Views.GatewayPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Puerta Frontal"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+        <ImageButton
+            Padding="60"
+            BackgroundColor="{Binding ImageColor}"
+            Command="{Binding LockUnlockCommand}"
+            CornerRadius="120"
+            IsEnabled="{Binding IsEnabled}"
+            Source="{Binding Image}" />
+
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+        <!--<forms:AnimationView
+            x:Name="animationView"
+            Animation="LottieLogo1.json"
+            AnimationSource="AssetOrBundle"
+            Command="{Binding ClickCommand}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" />-->
+
+        <!--<forms:AnimationView
+            x:Name="animationView"
+            Animation="resource://Resources.41812-christmas-tree.json?assembly=Lottiemas"
+            AnimationSource="EmbeddedResource"
+            AutoPlay="True"
+            BackgroundColor="Green"
+            Command="{Binding ClickCommand}"
+            HorizontalOptions="FillAndExpand"
+            RepeatCount="3"
+            RepeatMode="Restart"
+            VerticalOptions="FillAndExpand" />-->
+    </StackLayout>
 </ContentPage>

@@ -2,14 +2,18 @@
 using SmartAccess.Droid.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace SmartAccess.Droid.Services
 {
     public class ApiService
     {
+        private string _AccesToken;
         #region Usuario
 
         public async Task<Response<User>> GetUsuarioByEmailAsync(
@@ -199,7 +203,7 @@ namespace SmartAccess.Droid.Services
                 {
                     BaseAddress = new Uri(urlBase)
                 };
-           
+
 
 
                 var url = $"{urlBase}{servicePrefix}{controller}";
@@ -291,117 +295,133 @@ namespace SmartAccess.Droid.Services
                 };
             }
         }
+
+
+        public async Task<Response<SesionLock>> GetSesionByEmailAsync(
+        string urlBase,
+        string controller)
+        {
+            try
+            {
+
+                var request = new
+                {
+                    installId = "b7e2efe6-dd2c-11e7-9296-cec278b6b50a",
+                    password = "Da310894",
+                    identifier = "email:tejadadiiana@gmail.com"
+                };
+                var requestString = JsonConvert.SerializeObject(request);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Add("x-kease-api-key", "79fd0eb6-381d-4adf-95a0-47721289d1d9");
+
+
+                var url = $"{urlBase}{controller}";
+                var response = await client.PostAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<SesionLock>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var sesion = JsonConvert.DeserializeObject<SesionLock>(result);
+
+
+
+                IEnumerable<string> values;
+                var token = string.Empty;
+                if (response.Headers.TryGetValues("x-august-access-token", out values))
+                {
+                    token = values.FirstOrDefault();
+                    Preferences.Set("AccesToken", token);
+                }
+                return new Response<SesionLock>
+                {
+                    IsSuccess = true,
+                    Result = sesion
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<SesionLock>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+
+        public async Task<Response<StatusLock>> GetStatusLock(
+        string urlBase,
+        string servicePrefix,
+        string controller)
+        {
+            try
+            {
+                _AccesToken = Preferences.Get("AccesToken", "");
+
+                
+                var content = new StringContent("", Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+                client.DefaultRequestHeaders.Add("x-kease-api-key", "79fd0eb6-381d-4adf-95a0-47721289d1d9");
+                client.DefaultRequestHeaders.Add("x-august-access-token", _AccesToken);                
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.PutAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<StatusLock>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+                
+
+                var status = JsonConvert.DeserializeObject<StatusLock>(result);
+                return new Response<StatusLock>
+                {
+                    IsSuccess = true,
+                    Result = status
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<StatusLock>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
         #endregion
-
-        // #region Vehiculos
-        // public async Task<Response<List<Vehiculo>>> GetVehiculosUser(
-        //  string urlBase,
-        //  string servicePrefix,
-        //  string controller,
-        //  int id)
-        // {
-        //     try
-        //     {
-
-        //         //var request = new IdRequest { IdUsuario = id };
-        //         //var requestString = JsonConvert.SerializeObject(request);
-        //         //var content = new StringContent("", Encoding.UTF8, "application/json");
-
-        //         HttpClientHandler clientHandler = new HttpClientHandler();
-        //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-        //         // Pass the handler to httpclient(from you are calling api)
-        //         var client = new HttpClient(clientHandler)
-        //         {
-        //             BaseAddress = new Uri(urlBase)
-        //         };
-
-        //         //var client = new HttpClient
-        //         //{
-        //         //    BaseAddress = new Uri(urlBase)
-        //         //};
-
-
-
-        //         var url = $"{urlBase}{servicePrefix}{controller}/{id}";
-        //         var response = await client.GetAsync(url);
-        //         var result = await response.Content.ReadAsStringAsync();
-
-        //         if (!response.IsSuccessStatusCode)
-        //         {
-        //             return new Response<List<Vehiculo>>
-        //             {
-        //                 IsSuccess = false,
-        //                 Message = result,
-        //             };
-        //         }
-
-        //         var vehiculo = JsonConvert.DeserializeObject<List<Vehiculo>>(result);
-        //         return new Response<List<Vehiculo>>
-        //         {
-        //             IsSuccess = true,
-        //             Result = vehiculo
-        //         };
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         return new Response<List<Vehiculo>>
-        //         {
-        //             IsSuccess = false,
-        //             Message = ex.Message
-        //         };
-        //     }
-        // }
-
-
-
-
-        // public async Task<Response<object>> RegistroVehiculo(string urlBase, string servicePrefix, string controller, object vehiculo)
-        // {
-        //     try
-        //     {
-        //         var requestString = JsonConvert.SerializeObject(vehiculo);
-        //         var content = new StringContent(requestString, Encoding.UTF8, "application/json");
-        //         HttpClientHandler clientHandler = new HttpClientHandler();
-        //         clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
-
-        //         // Pass the handler to httpclient(from you are calling api)
-        //         var client = new HttpClient(clientHandler)
-        //         {
-        //             BaseAddress = new Uri(urlBase)
-        //         };
-
-        //         var url = $"{urlBase}{servicePrefix}{controller}";
-        //         var response = await client.PostAsync(url, content);
-        //         var result = await response.Content.ReadAsStringAsync();
-
-        //         if (!response.IsSuccessStatusCode)
-        //         {
-        //             return new Response<object>
-        //             {
-        //                 IsSuccess = false,
-        //                 Message = result,
-        //             };
-        //         }
-
-        //         var x = JsonConvert.DeserializeObject<object>(result);
-        //         return new Response<object>
-        //         {
-        //             IsSuccess = true,
-        //             Result = x
-        //         };
-        //     }
-        //     catch (Exception ex)
-        //     {
-
-        //         return new Response<object>
-        //         {
-        //             IsSuccess = false,
-        //             Message = ex.Message
-        //         };
-        //     }
-        // }
-
-        // #endregion
+     
     }
 }
