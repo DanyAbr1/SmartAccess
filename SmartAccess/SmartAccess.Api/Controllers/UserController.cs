@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FirebaseAdmin;
+using FirebaseAdmin.Messaging;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartAccess.Api.Helper;
 using SmartAccess.Api.Models;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,6 +16,7 @@ namespace SmartAccess.Api.Controllers
     [ApiController]
     public class UserController : Controller
     {
+        
         private readonly SmartAccessContext _context;
         private string _resultado;
         public UserController(SmartAccessContext context)
@@ -37,7 +42,7 @@ namespace SmartAccess.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
 
-            var usuario = _context.Users.Where(u => u.Id== id).ToList();
+            var usuario = _context.Users.Where(u => u.Id == id).ToList();
             if (usuario == null)
             {
                 return BadRequest("No se encontraron datos para este usuario");
@@ -67,8 +72,6 @@ namespace SmartAccess.Api.Controllers
 
             return Ok(usuario);
         }
-
-
 
 
         private User Authenticate(string login, string password)
@@ -118,26 +121,26 @@ namespace SmartAccess.Api.Controllers
                 _context.SaveChanges();
 
 
-            //    var currentUser = _context.Users.FirstOrDefault(o => o.Nombre1 == usuario.UserName && o.Contrasena == usuario.Password);
-            //    var vehiculoObj = new Vehiculo()
-            //    {
-            //        Matricula = usuario.Matricula,
-            //        Idusuario1 = currentUser.Idusuario
-            //    };
+                //    var currentUser = _context.Users.FirstOrDefault(o => o.Nombre1 == usuario.UserName && o.Contrasena == usuario.Password);
+                //    var vehiculoObj = new Vehiculo()
+                //    {
+                //        Matricula = usuario.Matricula,
+                //        Idusuario1 = currentUser.Idusuario
+                //    };
 
-            //    _context.Vehiculo.Update(vehiculoObj);
-            //    _context.SaveChanges();
+                //    _context.Vehiculo.Update(vehiculoObj);
+                //    _context.SaveChanges();
 
-            //    var licenciaObj = new Licencia()
-            //    {
-            //        Tipo = usuario.Tipo,
-            //        Vence = usuario.Vence,
-            //        Idusuario = currentUser.Idusuario
+                //    var licenciaObj = new Licencia()
+                //    {
+                //        Tipo = usuario.Tipo,
+                //        Vence = usuario.Vence,
+                //        Idusuario = currentUser.Idusuario
 
-            //    };
+                //    };
 
-            //    _context.Licencia.Update(licenciaObj);
-            //    _context.SaveChanges();
+                //    _context.Licencia.Update(licenciaObj);
+                //    _context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -198,6 +201,31 @@ namespace SmartAccess.Api.Controllers
 
             return NoContent();
         }
+
+
+        [HttpPost("FacialReconection")]
+        public async Task<IActionResult> FacialReconection([FromBody] User user)
+        {
+            if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.LastName))
+            {
+                return BadRequest($"El campo Name y el campo LastName son requeridos.");
+            }
+
+            var Orequest = new OpenRequest()
+            {
+                Name = $"{ user.Name } { user.LastName }",
+                Message = $"{user.Name } quiere entrar, Deseas abrirle la puerta?",
+                Status = "P",
+                DateRequest = DateTime.UtcNow.AddHours(-4)
+            };
+
+            _context.OpenRequests.Update(Orequest);
+            _context.SaveChanges();
+
+            await NotificationsSend.SendNotificationToAll("Smart Access", $"{user.Name} ha realizado una solicitud de ingreso.");
+            return NoContent();
+        }
+
 
     }
 }

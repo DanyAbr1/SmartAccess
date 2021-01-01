@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smaraccess-droid",
+  "private_key_id": "12ac7bf08477568e214c4b616da02c8493cdb3ed",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDBrB1u00oX2SFF\ncOV1nBkcFHHsjSceWO3FvP80RS89F76RXCmjOtZD8enxM9dO38g6jDkR7pLmp39D\nBZS4q6Zbjes4YgJi5s6/LTvo8gS54iDtkLxqYKAOClLYPe3CD/LQhrdTF087SRyX\nCaEWHIFAqG1A8WIpyimTdmehOx46wM1zoft1AtNVyp8GHGOfGUsqSfoSNGOgBVQk\nBAbe64k9JaQl6gWbRnh9EqAZ2S7bmH0A+ifFgefvbLppUxEYVyLOM2pEqaPecZl1\nAy8XuwWL36SGFe+uyzWFWMv7S20MlFHVc8/AmhZrIT5bU+YmFFCqcVj5bantT3XF\nn0d9+ZWnAgMBAAECggEAEAlC1KLdHzVk2l2bOk5HC/qrZjVX2FzvrzBTh031N99H\n8bxKXFAqXqzgvI6Y1NiVuTdUIGZ7NmsHEBMdud7IowsQv3XqEatf0heaPtMPTh7p\nsBIMb9h5WEBFlM8n6Sot5lNJSbGD53pJyj3LX0vT7fkkNrzl7mTlZWbn9MMy4RVh\nk25Mj2+FlvDLvXxLzY+V1m2Nd3QOBOWodWuv3De9itLqDyhDqv50yXY3cU5EItnZ\nVRnIg3yZPZkrWjZhNhcPGfGMxn1SERsSz5r8XsxKJk6Spy38bx/NNfJpHXj9LoLi\nMnUIzKxdGkewqhEJGNbOLGLOWu3MMaWnJNVGf+SivQKBgQD/rz/YnU0+cQAyk/ES\nqw0UvH5Tg46I0JKwhWd2AYnBv2qgDH4n83PYI4fA/L1QrNAJGmn/LvN3v1ycKeiG\nqI1w44jASu2Dl26MRdr6g8IyYtNx2XdHcr15xbG7K9RILvCjKiRsPGiVptItzrpa\nUhpBPwdSVnhMvm8pVu0YB7mvDQKBgQDB6UfiFSbrpua+hM1N/OwLHuwu8USgYqDU\nxe0C2KLSkw5blWhuJKTyZHyzHwJ3Z49WcRDrdYEfuE+qmgGsHybJn1fcJS3pZEcn\nYclP7Tih+ZQE7OPt+pwMGd7rQ490tgIwey4F9O+h5q+u+jQcPUcrLG9wlSDy3/VH\nMlCQEfiKgwKBgEhV3z08O3c35vNoMWKzq867CQ49gNyqDWYNR9j11HBQ5CyFfEd3\nM8XpP2XU2wZw7aY1p9k/AjhVljDEFnnKQ8G1TaIBULLS676ZoLsQ/abdmK5z9K/t\nATfrOz4Vx0fop8GxkX5hlMEJ4hp9ivE0myLsXvjnZ79mfPJ4GjmbLegdAoGAGVMN\nF0Kp7ZbDhdg0M943OZCVSeAqlUOsO32J4ZhHU3bvJhjSJahVfm6PNplzKgL1XlWv\n3wBel7Trep1YYJFE8IoF4HNelp+JB2Sm9PBHOCgvI6GIdvkGzjHGwjT1lEl86bX8\nobyGWz+UbCazDYkXNVU9TJe9UNrc3qp8iQQ/0F8CgYBZd2bXrtIacs2l18eXazbR\n9OLAmXPeAcWW/CiLlAnHZSouAjRN0eM7FWo9WI9jnckHDke+NcLaN3ujHfKc+TPg\nhYhdT6NrEFa+Wpu8g1kBCCFvxUDosMy43mt8dA44YOsOIOtOAkaV7HOXoE5T8K9I\nFM87HNPiYekjZrJ5BGxBjQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-b3c2p@smaraccess-droid.iam.gserviceaccount.com",
+  "client_id": "101133365663052933957",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-b3c2p%40smaraccess-droid.iam.gserviceaccount.com"
+}

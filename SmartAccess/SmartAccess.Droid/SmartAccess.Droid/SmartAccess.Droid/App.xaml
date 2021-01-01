@@ -37,12 +37,12 @@
             <Setter Property="CornerRadius" Value="10" />
         </Style>
 
-        <Style TargetType="{x:Type Frame}">
+        <!--<Style TargetType="{x:Type Frame}">
             <Setter Property="Margin" Value="8" />
             <Setter Property="Padding" Value="8" />
             <Setter Property="BorderColor" Value="{StaticResource Accent}" />
             <Setter Property="CornerRadius" Value="10" />
-        </Style>
+        </Style>-->
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="15,0,15,15" />

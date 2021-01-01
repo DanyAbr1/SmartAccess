@@ -10,32 +10,30 @@
 
 
     <StackLayout Margin="10">
-
-        <controls:AutoScrollListView
-            HasUnevenRows="true"
-            IsPullToRefreshEnabled="False"
+        <CollectionView
+            x:Name="collectionView"
             ItemsSource="{Binding Conversation}"
-            SelectionMode="None"
-            VerticalOptions="FillAndExpand">
-            <ListView.ItemTemplate>
+            ItemsUpdatingScrollMode="KeepLastItemInView">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout Padding="5">
-                            <Label
-                                FontSize="Small"
-                                LineBreakMode="NoWrap"
-                                Text="{Binding Name}"
-                                TextColor="Green" />
+                    <StackLayout>
 
-                            <Label
-                                FontSize="13"
-                                LineBreakMode="NoWrap"
-                                Text="{Binding Message}" />
-                        </StackLayout>
-                    </ViewCell>
+                        <Label
+                            FontSize="Small"
+                            LineBreakMode="NoWrap"
+                            Text="{Binding Name}"
+                            TextColor="Green" />
+
+                        <Label
+                            FontSize="13"
+                            LineBreakMode="NoWrap"
+                            Text="{Binding Message}" />
+
+                    </StackLayout>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </controls:AutoScrollListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
 
         <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
 

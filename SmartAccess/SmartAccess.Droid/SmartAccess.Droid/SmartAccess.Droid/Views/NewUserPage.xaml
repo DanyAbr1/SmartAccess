@@ -23,7 +23,7 @@
                     Opacity="50"
                     Placeholder="Nombres"
                     PlaceholderColor="Gray"
-                    Text="{Binding Nombre2}" />
+                    Text="{Binding Name}" />
 
                 <controls:StandardEntry
                     Padding="10"
@@ -34,7 +34,7 @@
                     Opacity="50"
                     Placeholder="Apellidos"
                     PlaceholderColor="Gray"
-                    Text="{Binding Apellido}">
+                    Text="{Binding LastName}">
                     <Entry.Behaviors>
                         <local:MaxLengthValidatorBehavior MaxLength="30" />
                     </Entry.Behaviors>
@@ -50,7 +50,7 @@
                     Opacity="50"
                     Placeholder="Usuario"
                     PlaceholderColor="Gray"
-                    Text="{Binding Nombre}">
+                    Text="{Binding UserName}">
                     <Entry.Behaviors>
                         <local:MaxLengthValidatorBehavior MaxLength="30" />
                     </Entry.Behaviors>
@@ -66,7 +66,7 @@
                     Opacity="50"
                     Placeholder="Contraseña"
                     PlaceholderColor="Gray"
-                    Text="{Binding Contrasena}" />
+                    Text="{Binding Password}" />
 
 
                 <controls:StandardEntry
@@ -78,44 +78,14 @@
                     Opacity="50"
                     Placeholder="Cedula"
                     PlaceholderColor="Gray"
-                    Text="{Binding Cedula}">
+                    Text="{Binding DNI}">
                     <Entry.Behaviors>
                         <local:MaskedBehavior Mask="XXX-XXXXXXX-X" />
                     </Entry.Behaviors>
                 </controls:StandardEntry>
 
                 <Label Text="Fecha de Nacimiento" />
-                <DatePicker Date="{Binding FechaNacimiento}" />
-
-
-
-                <Picker
-                    x:Name="PickerProducto"
-                    Title="Tipo Licencia"
-                    ItemDisplayBinding="{Binding NameLicencia}"
-                    ItemsSource="{Binding TipoLicencia}"
-                    SelectedItem="{Binding ItemLicencia}"
-                    Visual="Material" />
-
-
-                <Label Text="Fecha de Vencimiento" />
-                <DatePicker Date="{Binding FechaVence}" />
-
-
-                <controls:StandardEntry
-                    Padding="10"
-                    BorderColor="Gray"
-                    BorderThickness="1"
-                    CornerRadius="10"
-                    Keyboard="Default"
-                    Opacity="50"
-                    Placeholder="Matricula"
-                    PlaceholderColor="Gray"
-                    Text="{Binding Matricula}">
-                    <Entry.Behaviors>
-                        <local:MaxLengthValidatorBehavior MaxLength="30" />
-                    </Entry.Behaviors>
-                </controls:StandardEntry>
+                <DatePicker Date="{Binding BirthDate}" />
 
 
                 <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />

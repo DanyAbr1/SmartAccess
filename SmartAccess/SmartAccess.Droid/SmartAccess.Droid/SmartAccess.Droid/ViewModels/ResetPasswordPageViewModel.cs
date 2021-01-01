@@ -67,12 +67,12 @@ namespace SmartAccess.Droid.ViewModels
 
             var request = new
             {
-                Nombre1 = Usuario,
-                Contrasena = Password
+                UserName = Usuario,
+                Password = Password
             };
             var url = App.Current.Resources["UrlAPI"].ToString();
 
-            var response = await _apiService.OlvidePassword(url, "/api", "/Usuario/olvidePass", request);
+            var response = await _apiService.OlvidePassword(url, "/api", "/User/olvidePass", request);
             if (!response.IsSuccess)
             {
 

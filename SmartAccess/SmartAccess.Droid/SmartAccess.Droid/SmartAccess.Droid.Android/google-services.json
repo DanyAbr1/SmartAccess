@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947891185653",
+    "project_id": "smaraccess-droid",
+    "storage_bucket": "smaraccess-droid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947891185653:android:b3a6c8cb5269a4761ee2bc",
+        "android_client_info": {
+          "package_name": "com.shiftdominicana.smartacces"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947891185653-120ianqvbvvn24p66tihuvhfhm86qhao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUVwYRiTditrkd3nCVAh5JlPgbioou3UY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947891185653-120ianqvbvvn24p66tihuvhfhm86qhao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

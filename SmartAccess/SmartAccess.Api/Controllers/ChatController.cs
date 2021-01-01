@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
+using SmartAccess.Api.Helper;
 using SmartAccess.Api.Hubs;
 using SmartAccess.Api.Models;
 using System;
@@ -28,25 +29,27 @@ namespace SmartAccess.Api.Controllers
         public ActionResult<IEnumerable<Chat>> GetAll()
         {
             return _context.Chats.ToList();
-
         }
 
         [HttpPost("NewMessage")]
-        public async Task<IActionResult> Post([FromBody] Chat chat)
+        public async Task<IActionResult> Post([FromBody] Chat chat,bool mobile)
         {
 
             var NewMessage = new Chat()
             {                
                 Name = chat.Name,
                 Message = chat.Message,
-                DateMessage = DateTime.Now,
+                DateMessage = DateTime.Now                
             };
                        
             _context.Chats.Update(NewMessage);
             _context.SaveChanges();
-
+                      
             await _hub.Clients.All.SendAsync("NewMessage", JsonConvert.SerializeObject(NewMessage));
-
+            if (!mobile) 
+            {
+                await NotificationsSend.SendNotificationToAll(chat.Name, chat.Message);
+            }   
             return NoContent();
         }
 

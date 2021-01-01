@@ -12,6 +12,6 @@ namespace SmartAccess.Api.Models
         public string Name { get; set; }
         public string Message { get; set; }
         public DateTime DateMessage { get; set; }
-        public int UserId { get; set; }
+        public int UserId { get; set; }        
     }
 }

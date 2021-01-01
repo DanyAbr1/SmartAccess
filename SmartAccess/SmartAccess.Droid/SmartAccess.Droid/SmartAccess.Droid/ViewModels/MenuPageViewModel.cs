@@ -70,12 +70,12 @@ namespace SmartAccess.Droid.ViewModels
                     Pagina = "ChatPage",
                     Titulo = "Mensajes"
                 },
-                //  new Menu
-                //{
-                //    Icono = IconFont.User,
-                //    Pagina = "PerfilUsuarioPage",
-                //    Titulo = "Usuario"
-                //},
+                  new Menu
+                {
+                    Icono = IconFont.InfoCircle,
+                    Pagina = "OpenRequestPage",
+                    Titulo = "Solicitudes"
+                },
                 new Menu
                 {
                     Icono = IconFont.SignOutAlt,

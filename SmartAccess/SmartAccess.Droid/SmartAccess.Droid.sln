@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccess.Droid", "SmartAccess.Droid\SmartAccess.Droid\SmartAccess.Droid.csproj", "{A96F78A2-98BE-43E1-BA1F-80163278ECCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartAccess.Droid", "SmartAccess.Droid\SmartAccess.Droid\SmartAccess.Droid.csproj", "{A96F78A2-98BE-43E1-BA1F-80163278ECCD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartAccess.Droid.Android", "SmartAccess.Droid\SmartAccess.Droid.Android\SmartAccess.Droid.Android.csproj", "{20C5298D-D8B3-4E70-92B8-DC9EE6A41D59}"
 EndProject

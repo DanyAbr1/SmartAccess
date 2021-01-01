@@ -2,6 +2,8 @@ using Prism;
 using Prism.Ioc;
 using SmartAccess.Droid.ViewModels;
 using SmartAccess.Droid.Views;
+using SmartAccess.ViewModels;
+using SmartAccess.Views;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
@@ -33,14 +35,15 @@ namespace SmartAccess.Droid
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();            
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<MenuPage, MenuPageViewModel>();
             containerRegistry.RegisterForNavigation<GatewayPage, GatewayPageViewModel>();
             containerRegistry.RegisterForNavigation<ChatPage, ChatPageViewModel>();
             containerRegistry.RegisterForNavigation<NewUserPage, NewUserPageViewModel>();
             containerRegistry.RegisterForNavigation<ResetPasswordPage, ResetPasswordPageViewModel>();
+            containerRegistry.RegisterForNavigation<OpenRequestPage, OpenRequestPageViewModel>();
+            containerRegistry.RegisterForNavigation<DetailOpenRequestPage, DetailOpenRequestPageViewModel>();
         }
     }
 }

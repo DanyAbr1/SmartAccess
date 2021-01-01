@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAccess.Views.DetailOpenRequestPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="{Binding Name}"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <StackLayout>
+        <Frame Style="{StaticResource ProductoFrame}" VerticalOptions="Fill">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    Text="{Binding Name}" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalOptions="EndAndExpand"
+                    Text="{Binding Message}" />
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Margin="1"
+                    BackgroundColor="LightSeaGreen"
+                    Command="{Binding AceptarCommand}"
+                    HorizontalOptions="Fill"
+                    Text="Si" />
+
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="1"
+                    Padding="5"
+                    Command="{Binding CancelarCommand}"
+                    HorizontalOptions="Fill"
+                    Text="No" />
+
+            </Grid>
+        </Frame>
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+    </StackLayout>
+</ContentPage>

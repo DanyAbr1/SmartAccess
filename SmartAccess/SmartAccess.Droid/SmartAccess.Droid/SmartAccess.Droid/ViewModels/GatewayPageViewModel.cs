@@ -19,6 +19,7 @@ namespace SmartAccess.Droid.ViewModels
         private bool _status;
         private string _image;
         private string _imageColor;
+        private string action;
 
         public GatewayPageViewModel(INavigationService navigationService)
             : base(navigationService)
@@ -98,9 +99,9 @@ namespace SmartAccess.Droid.ViewModels
             IsRunning = false;
             IsEnabled = true;
 
-        }
+        }       
 
-        private async Task UnlockAsycn()
+        private async Task LockOrUnlockAsync()
         {
 
             IsRunning = true;
@@ -110,45 +111,7 @@ namespace SmartAccess.Droid.ViewModels
 
             var url2 = App.Current.Resources["UrlAPILock"].ToString();
 
-            var response = await _apiService.GetStatusLock(url2, "/remoteoperate", "/6D3AF4851A32417E90C9AAD31202ED8D/unlock");
-            if (!response.IsSuccess)
-            {
-
-                IsRunning = false;
-                IsEnabled = true;
-                if (response.Message == "")
-                {
-                    response.Message = "No se pudo conectar con el Servidor por favor intente más tarde.";
-                }
-
-                var isValid = IsValidJson.IsValid(response.Message);
-                if (isValid)
-                {
-                    var respuesta = JsonConvert.DeserializeObject<ResponseMessage>(response.Message);
-                    await App.Current.MainPage.DisplayAlert("Información", respuesta.Message, "Aceptar");
-                    return;
-                }
-
-                await App.Current.MainPage.DisplayAlert("Información", response.Message, "Aceptar");
-                return;
-            }
-
-            GetStatus("kAugLockState_Unlocked");
-            IsRunning = false;
-            IsEnabled = true;
-        }
-
-        private async Task LockAsync()
-        {
-
-            IsRunning = true;
-            IsEnabled = false;
-
-
-
-            var url2 = App.Current.Resources["UrlAPILock"].ToString();
-
-            var response = await _apiService.GetStatusLock(url2, "/remoteoperate", "/6D3AF4851A32417E90C9AAD31202ED8D/lock");
+            var response = await _apiService.GetStatusLock(url2, "/remoteoperate", "/6D3AF4851A32417E90C9AAD31202ED8D/"+action);
             if (!response.IsSuccess)
             {
 
@@ -188,10 +151,12 @@ namespace SmartAccess.Droid.ViewModels
             switch (_status)
             {
                 case true:
-                    await UnlockAsycn();
+                    await LockOrUnlockAsync();
+                    action = "unlock";                    
                     break;
                 case false:
-                    await LockAsync();
+                    await LockOrUnlockAsync();
+                    action = "lock";
                     break;
             }
         }
@@ -210,7 +175,11 @@ namespace SmartAccess.Droid.ViewModels
                     _status = false;
                     ImageColor = "Red";
                     break;
-            }
+                default:
+                    Preferences.Set("StatusLock", false);
+                    break;
+            }            
+            
         }
     }
 }

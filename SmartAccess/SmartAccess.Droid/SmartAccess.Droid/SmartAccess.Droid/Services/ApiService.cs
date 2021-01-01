@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -236,6 +235,58 @@ namespace SmartAccess.Droid.Services
             }
         }
 
+        public async Task<Response<List<OpenRequest>>> GetOpenRequest(
+        string urlBase,
+        string servicePrefix,
+        string controller)
+        {
+            try
+            {
+
+                //var request = new IdRequest { IdUsuario = id };
+                //var requestString = JsonConvert.SerializeObject(request);
+                //var content = new StringContent("", Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };
+
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}";
+                var response = await client.GetAsync(url);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<List<OpenRequest>>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+                var list = JsonConvert.DeserializeObject<List<OpenRequest>>(result);
+                return new Response<List<OpenRequest>>
+                {
+                    IsSuccess = true,
+                    Result = list
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<List<OpenRequest>>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
 
         public async Task<Response<Chat>> NewMessage(
         string urlBase,
@@ -266,7 +317,7 @@ namespace SmartAccess.Droid.Services
 
 
 
-                var url = $"{urlBase}{servicePrefix}{controller}";
+                var url = $"{urlBase}{servicePrefix}{controller}?mobile=true";
                 var response = await client.PostAsync(url, content);
                 var result = await response.Content.ReadAsStringAsync();
 
@@ -375,7 +426,7 @@ namespace SmartAccess.Droid.Services
             {
                 _AccesToken = Preferences.Get("AccesToken", "");
 
-                
+
                 var content = new StringContent("", Encoding.UTF8, "application/json");
 
                 HttpClientHandler clientHandler = new HttpClientHandler();
@@ -388,12 +439,12 @@ namespace SmartAccess.Droid.Services
                 };
 
                 client.DefaultRequestHeaders.Add("x-kease-api-key", "79fd0eb6-381d-4adf-95a0-47721289d1d9");
-                client.DefaultRequestHeaders.Add("x-august-access-token", _AccesToken);                
+                client.DefaultRequestHeaders.Add("x-august-access-token", _AccesToken);
 
 
                 var url = $"{urlBase}{servicePrefix}{controller}";
                 var response = await client.PutAsync(url, content);
-                var result = await response.Content.ReadAsStringAsync();
+                var result = await response.Content.ReadAsStringAsync();              
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -403,7 +454,7 @@ namespace SmartAccess.Droid.Services
                         Message = result,
                     };
                 }
-                
+
 
                 var status = JsonConvert.DeserializeObject<StatusLock>(result);
                 return new Response<StatusLock>
@@ -421,7 +472,61 @@ namespace SmartAccess.Droid.Services
                 };
             }
         }
+
+        public async Task<Response<OpenRequest>> SetStatus(
+       string urlBase,
+       string servicePrefix,
+       string controller,
+       int id,
+       OpenRequest value)
+        {
+            try
+            {
+
+                var requestString = JsonConvert.SerializeObject(value);
+                var content = new StringContent(requestString, Encoding.UTF8, "application/json");
+
+                HttpClientHandler clientHandler = new HttpClientHandler();
+                clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+                // Pass the handler to httpclient(from you are calling api)
+                var client = new HttpClient(clientHandler)
+                {
+                    BaseAddress = new Uri(urlBase)
+                };                
+
+
+                var url = $"{urlBase}{servicePrefix}{controller}{id}";
+                var response = await client.PutAsync(url, content);
+                var result = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return new Response<OpenRequest>
+                    {
+                        IsSuccess = false,
+                        Message = result,
+                    };
+                }
+
+
+                var status = JsonConvert.DeserializeObject<OpenRequest>(result);
+                return new Response<OpenRequest>
+                {
+                    IsSuccess = true,
+                    Result = status
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<OpenRequest>
+                {
+                    IsSuccess = false,
+                    Message = ex.Message
+                };
+            }
+        }
         #endregion
-     
+
     }
 }

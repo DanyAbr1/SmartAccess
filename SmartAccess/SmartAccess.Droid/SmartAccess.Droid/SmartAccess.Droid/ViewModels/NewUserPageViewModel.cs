@@ -17,12 +17,12 @@ namespace SmartAccess.Droid.ViewModels
         private bool _isRunning;
         private DelegateCommand _solicitudCommand;        
         private bool _isEnabled;
-        private string _apellido;
-        private string _nombre;
-        private string _login;        
-        private string _cedula;               
-        private DateTime _fechaNacimiento;
-        private string _contrasena;
+        private string _lastName;
+        private string _name;
+        private string _userName;        
+        private string _dni;               
+        private DateTime _birthDay;
+        private string _password;
         private readonly INavigationService _navigationService;
 
 
@@ -53,43 +53,43 @@ namespace SmartAccess.Droid.ViewModels
         }
 
 
-        public string Nombre
+        public string Name
         {
-            get => _nombre;
-            set => SetProperty(ref _nombre, value);
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
-        public string Apellido
+        public string LastName
         {
-            get => _apellido;
-            set => SetProperty(ref _apellido, value);
-        }
-
-
-
-        public string Nombre2
-        {
-            get => _login;
-            set => SetProperty(ref _login, value);
-        }
-
-        public string Contrasena
-        {
-            get => _contrasena;
-            set => SetProperty(ref _contrasena, value);
-        }
-
-        public string Cedula
-        {
-            get => _cedula;
-            set => SetProperty(ref _cedula, value);
+            get => _lastName;
+            set => SetProperty(ref _lastName, value);
         }
 
 
-        public DateTime FechaNacimiento
+
+        public string UserName
         {
-            get => _fechaNacimiento;
-            set => SetProperty(ref _fechaNacimiento, value);
+            get => _userName;
+            set => SetProperty(ref _userName, value);
+        }
+
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+        public string DNI
+        {
+            get => _dni;
+            set => SetProperty(ref _dni, value);
+        }
+
+
+        public DateTime BirthDay
+        {
+            get => _birthDay;
+            set => SetProperty(ref _birthDay, value);
         }
 
         #endregion
@@ -141,11 +141,11 @@ namespace SmartAccess.Droid.ViewModels
 
         public async Task<bool> ValidaDatosAsync()
         {
-            if (string.IsNullOrEmpty(Nombre)
-                || string.IsNullOrEmpty(Apellido)
-                || string.IsNullOrEmpty(Cedula)
-                || string.IsNullOrEmpty(Contrasena)
-                || FechaNacimiento == null)
+            if (string.IsNullOrEmpty(Name)
+                || string.IsNullOrEmpty(LastName)
+                || string.IsNullOrEmpty(DNI)
+                || string.IsNullOrEmpty(Password)
+                || BirthDay == null)
             {
                 await App.Current.MainPage.DisplayAlert("Información", "Debe completar todos los campos para poder procesar la soliciúd.", "Aceptar");
                 return false;
@@ -159,17 +159,17 @@ namespace SmartAccess.Droid.ViewModels
         {
             return new User
             {
-                Name= Nombre,
+                Name= Name,
 
-                LastName= Apellido,
+                LastName= LastName,
 
-                UserName= Nombre2,
+                UserName= UserName,
 
-                DNI= Cedula,
+                DNI= DNI,
                                 
-                BirthDate= FechaNacimiento,
+                BirthDate= BirthDay,
 
-                Password= Contrasena,
+                Password= Password,
                 
 
             };
@@ -177,10 +177,10 @@ namespace SmartAccess.Droid.ViewModels
 
         private void LimpiarComponentes()
         {         
-            Nombre = string.Empty;
-            Apellido = string.Empty;
-            Cedula = string.Empty;
-            Contrasena = string.Empty;         
+            Name = string.Empty;
+            LastName = string.Empty;
+            DNI = string.Empty;
+            Password = string.Empty;         
 
         }
         #endregion

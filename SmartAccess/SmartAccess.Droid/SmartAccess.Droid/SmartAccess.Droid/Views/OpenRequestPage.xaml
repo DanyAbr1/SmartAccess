@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAccess.Views.OpenRequestPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    Title="Solicitud de Accesos"
+    prism:ViewModelLocator.AutowireViewModel="True">
+
+    <StackLayout Margin="10">
+        <CollectionView
+            x:Name="collectionView"
+            ItemsSource="{Binding RequestSource}"
+            SelectedItem="{Binding RequestItem}"
+            SelectionChangedCommand="{Binding NavigateToDetail}"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ProductoFrame}">
+                            <StackLayout>
+                                <Label
+                                    Grid.Column="1"
+                                    FontAttributes="Bold"
+                                    FontSize="Large"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    FontAttributes="Italic"
+                                    Text="{Binding Message}"
+                                    VerticalOptions="End" />
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <ActivityIndicator IsRunning="{Binding IsRunning}" IsVisible="{Binding IsRunning}" />
+    </StackLayout>
+
+</ContentPage>

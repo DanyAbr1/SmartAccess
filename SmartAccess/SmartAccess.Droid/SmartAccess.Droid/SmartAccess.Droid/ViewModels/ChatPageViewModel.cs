@@ -6,6 +6,7 @@ using SmartAccess.Droid.Models;
 using SmartAccess.Droid.Services;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -92,8 +93,10 @@ namespace SmartAccess.Droid.ViewModels
                 await _navigationService.GoBackToRootAsync();
                 return;
             }
-
-
+            //var fechahoy = DateTime.UtcNow;
+            //fechahoy = fechahoy.AddHours(-4);
+            ////var fechapais = fechahoy.AddHours(-4).ToString("yyyy-MM-dd");
+            //var list = response.Result.ToList().Where(m => m.DateMessage == fechahoy);
             response.Result.ForEach(x => Conversation.Add(x));
      
 
