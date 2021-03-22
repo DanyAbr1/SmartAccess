@@ -15,7 +15,9 @@ namespace SmartAccess.Droid
     {
 
         public static string AzureBackendUrl =
+           //DeviceInfo.Platform == DevicePlatform.Android ? "https://192.168.1.109:5001" : "http://localhost:5000";
            DeviceInfo.Platform == DevicePlatform.Android ? "https://smartaccessapi.azurewebsites.net" : "http://localhost:5000";
+
         public static bool UseMockDataStore = false;
         
 

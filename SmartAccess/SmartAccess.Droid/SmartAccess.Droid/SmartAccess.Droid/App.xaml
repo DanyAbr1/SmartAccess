@@ -65,7 +65,7 @@
         <ResourceDictionary>
             <x:String x:Key="UrlAPI">https://smartaccessapi.azurewebsites.net</x:String>
             <x:String x:Key="UrlAPILock">https://api-production.august.com</x:String>
-            <!--<x:String x:Key="UrlAPI">https://192.168.1.108:5001</x:String>-->
+            <!--<x:String x:Key="UrlAPI">https://192.168.1.109:5001</x:String>-->
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>
