@@ -4,6 +4,7 @@ using SmartAccess.Droid.Models;
 using SmartAccess.Droid.Services;
 using SmartAccess.Droid.ViewModels;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 

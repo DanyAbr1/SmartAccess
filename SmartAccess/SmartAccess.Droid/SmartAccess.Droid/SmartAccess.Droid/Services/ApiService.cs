@@ -357,7 +357,7 @@ namespace SmartAccess.Droid.Services
 
                 var request = new
                 {
-                    installId = "b7e2efe6-dd2c-11e7-9296-cec278b6b50a",
+                    installId = "79fd0eb6-381d-4adf-95a0-47721289d1d9",
                     password = "Da310894",
                     identifier = "email:tejadadiiana@gmail.com"
                 };
@@ -424,6 +424,7 @@ namespace SmartAccess.Droid.Services
         {
             try
             {
+                _AccesToken = "";
                 _AccesToken = Preferences.Get("AccesToken", "");
 
 

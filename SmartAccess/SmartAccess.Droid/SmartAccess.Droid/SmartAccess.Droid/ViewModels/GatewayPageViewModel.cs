@@ -71,6 +71,7 @@ namespace SmartAccess.Droid.ViewModels
 
             var url2 = App.Current.Resources["UrlAPILock"].ToString();
 
+                                                                                   //6D3AF4851A32417E90C9AAD31202ED8D               
             var response = await _apiService.GetStatusLock(url2, "/remoteoperate", "/6D3AF4851A32417E90C9AAD31202ED8D/status");
             if (!response.IsSuccess)
             {

@@ -216,7 +216,9 @@ namespace SmartAccess.Api.Controllers
                 Name = $"{ user.Name } { user.LastName }",
                 Message = $"{user.Name } quiere entrar, Deseas abrirle la puerta?",
                 Status = "P",
-                DateRequest = DateTime.UtcNow.AddHours(-4)
+                DateRequest = DateTime.UtcNow.AddHours(-4),
+                Picture = user.Picture
+                
             };
 
             _context.OpenRequests.Update(Orequest);

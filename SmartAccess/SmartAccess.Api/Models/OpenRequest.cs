@@ -14,5 +14,7 @@ namespace SmartAccess.Api.Models
         public DateTime DateRequest { get; set; }
         public string Message { get; set; }
         public string Status { get; set; }
+        public byte[] Picture { get; set; }
+
     }
 }

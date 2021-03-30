@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SmartAccess.Droid.Models
 {
@@ -14,6 +15,6 @@ namespace SmartAccess.Droid.Models
         public DateTime DateRequest { get; set; }
         public string Message { get; set; }
         public string Status { get; set; }
-        public byte[] UserImage { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

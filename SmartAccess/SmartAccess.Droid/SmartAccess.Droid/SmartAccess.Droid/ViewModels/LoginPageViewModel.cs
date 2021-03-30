@@ -29,6 +29,7 @@ namespace SmartAccess.Droid.ViewModels
             _navigationService = navigationService;
             _apiService = new ApiService();
             _isEnabled = true;
+            RemoveCache();
 
         }
 
@@ -152,6 +153,14 @@ namespace SmartAccess.Droid.ViewModels
         {
             await _navigationService.NavigateAsync("ResetPasswordPage");
 
+        }
+
+        private void RemoveCache()
+        {
+            Preferences.Remove("Usuario");
+            Preferences.Remove("idUsuario");
+            Preferences.Remove("nombreCompleto");
+            Preferences.Remove("AccesToken");
         }
 
         #endregion

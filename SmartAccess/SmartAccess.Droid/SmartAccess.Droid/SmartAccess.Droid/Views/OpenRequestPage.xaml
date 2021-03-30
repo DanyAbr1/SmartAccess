@@ -3,9 +3,18 @@
     x:Class="SmartAccess.Views.OpenRequestPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Converter="clr-namespace:SmartAccess.Converters"
     xmlns:prism="http://prismlibrary.com"
     Title="Solicitud de Accesos"
     prism:ViewModelLocator.AutowireViewModel="True">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:ByteArrayToImageSourceConverter x:Key="ByteToImage" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
 
     <StackLayout Margin="10">
         <CollectionView
@@ -16,9 +25,12 @@
             SelectionMode="Single">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
+                    <Grid ColumnDefinitions="Auto,*,*">
                         <Frame HorizontalOptions="FillAndExpand" Style="{StaticResource ProductoFrame}">
                             <StackLayout>
+                                <Frame Grid.Column="0">
+                                    <Image Source="{Binding Picture, Converter={StaticResource ByteToImage}}" />
+                                </Frame>
                                 <Label
                                     Grid.Column="1"
                                     FontAttributes="Bold"
