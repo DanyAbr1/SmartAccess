@@ -214,7 +214,8 @@ namespace SmartAccess.Api.Controllers
             var Orequest = new OpenRequest()
             {
                 Name = $"{ user.Name } { user.LastName }",
-                Message = $"{user.Name } quiere entrar, Deseas abrirle la puerta?",
+                Message = $"{user.Name } quiere entrar, ¿Deseas abrirle la puerta?",
+
                 Status = "P",
                 DateRequest = DateTime.UtcNow.AddHours(-4),
                 Picture = user.Picture

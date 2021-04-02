@@ -8,6 +8,7 @@
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#FFFFFF"
+    IsVisible="{Binding PageVisble}"
     NavigationPage.HasNavigationBar="False">
 
 

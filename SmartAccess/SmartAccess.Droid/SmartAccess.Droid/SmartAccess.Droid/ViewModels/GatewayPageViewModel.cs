@@ -108,6 +108,7 @@ namespace SmartAccess.Droid.ViewModels
             IsRunning = true;
             IsEnabled = false;
 
+           
 
 
             var url2 = App.Current.Resources["UrlAPILock"].ToString();
@@ -135,7 +136,7 @@ namespace SmartAccess.Droid.ViewModels
                 return;
             }
 
-            GetStatus("kAugLockState_Locked");
+            GetStatus(response.Result.Status);
             IsRunning = false;
             IsEnabled = true;
         }
@@ -152,12 +153,12 @@ namespace SmartAccess.Droid.ViewModels
             switch (_status)
             {
                 case true:
-                    await LockOrUnlockAsync();
-                    action = "unlock";                    
+                    action = "unlock";
+                    await LockOrUnlockAsync();                    
                     break;
                 case false:
-                    await LockOrUnlockAsync();
                     action = "lock";
+                    await LockOrUnlockAsync();
                     break;
             }
         }
@@ -169,12 +170,12 @@ namespace SmartAccess.Droid.ViewModels
                 case "kAugLockState_Locked":
                     Image = "Locked.png";
                     _status = true;
-                    ImageColor = "GreenYellow";
+                    ImageColor = "Red";                    
                     break;
                 case "kAugLockState_Unlocked":
                     Image = "Unlocked.png";
-                    _status = false;
-                    ImageColor = "Red";
+                    _status = false;                    
+                    ImageColor = "GreenYellow";
                     break;
                 default:
                     Preferences.Set("StatusLock", false);

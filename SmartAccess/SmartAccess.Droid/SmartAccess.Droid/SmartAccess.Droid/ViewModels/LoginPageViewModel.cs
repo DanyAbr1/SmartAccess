@@ -21,7 +21,7 @@ namespace SmartAccess.Droid.ViewModels
         private DelegateCommand _registrarCommand;
         private DelegateCommand _restaurarPassCommand;
         private bool _encendido;
-
+        private bool _pageVisble;
 
         public LoginPageViewModel(INavigationService navigationService)
         : base(navigationService)
@@ -29,6 +29,7 @@ namespace SmartAccess.Droid.ViewModels
             _navigationService = navigationService;
             _apiService = new ApiService();
             _isEnabled = true;
+            PageVisble = false;
             RemoveCache();
 
         }
@@ -59,6 +60,12 @@ namespace SmartAccess.Droid.ViewModels
         {
             get => _isEnabled;
             set => SetProperty(ref _isEnabled, value);
+        }
+
+        public bool PageVisble
+        {
+            get => _pageVisble;
+            set => SetProperty(ref _pageVisble, value);
         }
         #endregion
 
@@ -119,8 +126,10 @@ namespace SmartAccess.Droid.ViewModels
             
 
             Preferences.Set("idUsuario", response.Result.Id);
-            Preferences.Set("nombreCompleto", $"{ response.Result.Name} { response.Result.LastName}");            
+            Preferences.Set("nombreCompleto", $"{ response.Result.Name} { response.Result.LastName}");
 
+            Preferences.Set("email", Email);
+            Preferences.Set("pass", Password);
 
             var parameter = new NavigationParameters();
             parameter.Add("Usuario", response.Result);
@@ -161,6 +170,20 @@ namespace SmartAccess.Droid.ViewModels
             Preferences.Remove("idUsuario");
             Preferences.Remove("nombreCompleto");
             Preferences.Remove("AccesToken");
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+            if (!string.IsNullOrEmpty(Preferences.Get("email","")) && !string.IsNullOrEmpty(Preferences.Get("pass", "")))
+            {                
+                Email = Preferences.Get("email", "");
+                Password = Preferences.Get("pass", "");
+                Login();
+                return;
+            }
+
+            PageVisble = true;
         }
 
         #endregion

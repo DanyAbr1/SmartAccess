@@ -93,6 +93,8 @@ namespace SmartAccess.Droid.ViewModels
                 var confirm = await App.Current.MainPage.DisplayAlert("Información", "¿Esta seguro que desea cerrar la sesión?", "Salir", "Cancelar");
                 if (confirm)
                 {
+                    Preferences.Remove("email");
+                    Preferences.Remove("pass");
                     await _navigationService.NavigateAsync("/NavigationPage/LoginPage");
                 }
 
