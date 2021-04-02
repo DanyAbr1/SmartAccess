@@ -35,8 +35,7 @@ namespace SmartAccess
                      Flashlight.TurnOnAsync();
                      Vibration.Vibrate(15);
                     // Turn Off
-                    Thread.Sleep(5000);
-                    Task.Delay(TimeSpan.FromMilliseconds(1500));
+                    Thread.Sleep(1000);
                     Flashlight.TurnOffAsync();
 
                 }

@@ -165,12 +165,14 @@ namespace SmartAccess.Droid.ViewModels
 
         private void GetStatus(string Status)
         {
+            Preferences.Set("StatusLock", true);
+
             switch (Status)
             {
                 case "kAugLockState_Locked":
                     Image = "Locked.png";
                     _status = true;
-                    ImageColor = "Red";                    
+                    ImageColor = "Red";     
                     break;
                 case "kAugLockState_Unlocked":
                     Image = "Unlocked.png";

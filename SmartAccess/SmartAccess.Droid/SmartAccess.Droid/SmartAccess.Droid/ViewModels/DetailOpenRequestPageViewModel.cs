@@ -98,9 +98,9 @@ namespace SmartAccess.ViewModels
             MainThread.BeginInvokeOnMainThread (async() =>
             {
                 
-                await LockOrUnlockAsync("lock");
-                await Task.Delay(TimeSpan.FromSeconds(15));
                 await LockOrUnlockAsync("unlock");
+                await Task.Delay(TimeSpan.FromSeconds(5));
+                await LockOrUnlockAsync("lock");
             });
 
 
