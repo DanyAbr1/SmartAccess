@@ -90,7 +90,7 @@ namespace SmartAccess.ViewModels
 
 
                 await Prism.PrismApplicationBase.Current.MainPage.DisplayAlert("Información", response.Message.ToString(), "Aceptar");
-                await _navigationService.GoBackToRootAsync();
+                await _navigationService.NavigateAsync("/MenuPage/NavigationPage/GatewayPage");
                 return;
             }
 
@@ -129,7 +129,7 @@ namespace SmartAccess.ViewModels
             }
 
             IsRunning = false;
-            await _navigationService.GoBackToRootAsync();
+            await _navigationService.NavigateAsync("/MenuPage/NavigationPage/ChatPage");
         }
 
         private async Task LockOrUnlockAsync(string action)

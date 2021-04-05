@@ -18,6 +18,6 @@ namespace SmartAccess.Api.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Chat> Chats { get; set; }
         public virtual DbSet<OpenRequest>  OpenRequests{ get; set; }
-
+        public virtual DbSet<RpiStatus> Rpis{ get; set; }
     }
 }
