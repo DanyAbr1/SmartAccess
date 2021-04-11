@@ -34,7 +34,8 @@ namespace SmartAccess.Api.Controllers
             var SaveStatus = new RpiStatus
             {
                 TimeUp = status.TimeUp,
-                Temperature = status.Temperature
+                Temperature = status.Temperature,
+                Email = status.Email
             };
 
             _context.Rpis.Update(SaveStatus);

@@ -11,6 +11,6 @@ namespace SmartAccess.Api.Models
         public int Id { get; set; }
         public string TimeUp { get; set; }
         public string Temperature { get; set; }
-
+        public string Email { get; set; }
     }
 }

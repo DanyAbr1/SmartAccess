@@ -58,12 +58,35 @@ namespace SmartAccess.Api.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("longblob");
+
                     b.Property<string>("Status")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("Id");
 
                     b.ToTable("OpenRequests");
+                });
+
+            modelBuilder.Entity("SmartAccess.Api.Models.RpiStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Temperature")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("TimeUp")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Rpis");
                 });
 
             modelBuilder.Entity("SmartAccess.Api.Models.User", b =>
@@ -95,6 +118,9 @@ namespace SmartAccess.Api.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("longblob");
 
                     b.Property<string>("UserName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
